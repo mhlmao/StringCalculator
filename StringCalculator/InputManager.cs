@@ -15,6 +15,7 @@ namespace StringCalculator
         public InputManager(string input)
         {
             this.input = input;
+            if(input.StartsWith("//"))
             this.delimitersSection = getDelimitersSection();
             SetDelimiters(delimitersSection);
         }
@@ -62,7 +63,8 @@ namespace StringCalculator
         private void SetDelimiters(string delimitersSection) 
         {
             List<string> delimiters = BuildDefaultDelimeters();
-            delimiters.AddRange(BuildCustomDelimiters());
+            if(!string.IsNullOrEmpty(delimitersSection))
+                delimiters.AddRange(BuildCustomDelimiters());
             this.delimiters = delimiters;
         }
 

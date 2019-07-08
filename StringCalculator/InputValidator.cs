@@ -10,8 +10,6 @@ namespace StringCalculator
         {
             if (string.IsNullOrEmpty(entry)) return false;
 
-            if(entry)
-
             if (InputBeginsWhitDoubleSlashes(entry))
             {
 

@@ -21,28 +21,28 @@ namespace StringCalculator.Test
             Assert.Equal(0, result);
         }
 
-        [Theory]
-        [InlineData("1,2,A")]
-        [InlineData("1,],[")]
-        [InlineData("1 ,2,A")]
-        public void Input_Should_Only_Accept_Numbers_As_Items(string input)
-        {
-            var validator = new InputValidator();
-            var result = validator.IsValidEntry(input);
-            Assert.True(!result);
-        }
+        //[Theory]
+        //[InlineData("1,2,A")]
+        //[InlineData("1,],[")]
+        //[InlineData("1 ,2,A")]
+        //public void Input_Should_Only_Accept_Numbers_As_Items(string input)
+        //{
+        //    var validator = new InputValidator();
+        //    var result = validator.IsValidEntry(input);
+        //    Assert.True(!result);
+        //}
 
-        [Theory]
-        [ClassData(typeof(EntryDataStringProvider))]
-        public void Input_Should_Only_Accept_Numbers_As_Items_To_Sum(string entry)
-        {
-            InputValidator validator = new InputValidator();
+        //[Theory]
+        //[ClassData(typeof(EntryDataStringProvider))]
+        //public void Input_Should_Only_Accept_Numbers_As_Items_To_Sum(string entry)
+        //{
+        //    InputValidator validator = new InputValidator();
 
-            bool result = true;
+        //    bool result = true;
 
-            Assert.True(result);
+        //    Assert.True(result);
 
-            Assert.True(result);
-        }
+        //    Assert.True(result);
+        //}
     }
 }

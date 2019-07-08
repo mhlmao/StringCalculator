@@ -7,17 +7,13 @@ namespace StringCalculator
     public class StringCalculator
     {
 
-        private readonly InputStringCategorizer categorizer;
+        private InputManager input;
         private readonly InputValidator validator;
 
-        public StringCalculator(InputManager input,
-                                InputValidator validator)
-        {
-            this.categorizer = categorizer;
-            this.validator = validator;
+        public StringCalculator()
+        {   
+            this.validator = new InputValidator();
         }
-
-        
 
         public int Add(string numbers)
         {
@@ -25,23 +21,11 @@ namespace StringCalculator
 
             else
             {
-                List<string> delimiters = BuildDefaultDelimeters();
+                this.input = new InputManager(numbers);
+                List<string> delimiters = input.GetDelimiters();
 
-                delimiters.AddRange(categorizer.Delimiters);
-
-                //custom delimiters
-                if (numbers.StartsWith("//"))
-                {
-                    var sectionOfDelimitersDefinition =
-                        numbers.Substring(2, numbers.IndexOf("\n") - 2);
-
-                    var settedDelimiters = SetDelimiters(sectionOfDelimitersDefinition);
-                    delimiters.AddRange(settedDelimiters);
-                }
-
-                //To Sum
                 int result = 0;
-                int intNumber = 0;
+                int intNumber;
                 List<int> negatives = new List<int>();
 
                 //Split string by delimiters
@@ -65,27 +49,6 @@ namespace StringCalculator
 
                 return result;
             }
-        }
-
-        private List<string> SetDelimiters(string delimitersSection)
-        {
-            List<string> delimiters = new List<string>();
-
-            string pattern = "\\[(.*?)\\]";
-            var delimitersFiltered = Regex.Matches(delimitersSection, pattern, RegexOptions.IgnorePatternWhitespace);
-
-            foreach (var delimiter in delimitersFiltered)
-            {
-                string stringDelimiter = delimiter.ToString();
-                string substring = stringDelimiter.Substring(
-                       stringDelimiter.IndexOf("[") + 1,
-                       stringDelimiter.IndexOf("]") - 1
-                   );
-
-                delimiters.Add(substring);
-            }
-
-            return delimiters;
         }
     }
 }
